@@ -81,7 +81,7 @@ s_irecv() { rm -rf libirecovery-m; git clone --depth 1 https://github.com/libimo
     && ./configure --host="$HOST" --prefix="$PREFIX" --enable-static --disable-shared --without-tools \
     && make -j"$JOBS" && make install; }
 
-s_glue() { build_lib libimobiledevice-glue 1.0.0 libimobiledevice/libimobiledevice-glue; }
+s_glue() { build_lib libimobiledevice-glue 1.3.3 libimobiledevice/libimobiledevice-glue; }
 
 # libimobiledevice: 1.3.0 tag (2020) predates libplist 2.3.0 and redefines
 # PLIST_FORMAT_XML/BINARY enumerators already provided by modern libplist, causing
