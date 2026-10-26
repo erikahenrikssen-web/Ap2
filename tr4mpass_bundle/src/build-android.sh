@@ -101,3 +101,13 @@ stage usbmuxd  s_usbmuxd  || true
 stage glue     s_glue     || true
 stage irecovery s_irecv   || true
 stage imobiledevice s_imd || true
+
+s_tr4mpass() {
+  cd "$SRCDIR"
+  make clean 2>/dev/null || true
+  make -j"$JOBS" CC="$CC" NATIVE_CC=cc
+  "$STRIP" tr4mpass || true
+  cp tr4mpass "$OUT/tr4mpass-arm64"
+}
+
+stage tr4mpass s_tr4mpass
