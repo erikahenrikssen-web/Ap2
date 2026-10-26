@@ -111,7 +111,9 @@ stage imobiledevice s_imd || true
 s_tr4mpass() {
   cd "$SRCDIR"
   make clean 2>/dev/null || true
-  make -j"$JOBS" CC="$CC" NATIVE_CC=cc
+  PKG_LIBS_TR4="libimobiledevice-1.0 libirecovery-1.0 libusb-1.0 libplist-2.0 openssl libcurl libssh2"
+  STATIC_LDFLAGS="$(pkg-config --static --libs $PKG_LIBS_TR4) -lm"
+  make -j"$JOBS" CC="$CC" NATIVE_CC=cc LDFLAGS="$STATIC_LDFLAGS"
   "$STRIP" tr4mpass || true
   cp tr4mpass "$OUT/tr4mpass-arm64"
 }
