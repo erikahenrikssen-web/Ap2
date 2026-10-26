@@ -18,6 +18,7 @@ export PATH="$TC/bin:$PATH"
 HOST=aarch64-linux-android
 JOBS=$(nproc 2>/dev/null || echo 4)
 mkdir -p "$PREFIX/lib/pkgconfig" "$OUT" "$LOG" /tmp/asrc
+"$AR" rcs "$PREFIX/lib/libpthread.a"  # NDK r23+ dropped stub libs; tools/ hardcodes -lpthread
 cd /tmp/asrc
 
 fetch() { local d="$1" u="$2"; [ -d "$d" ] && return 0
@@ -92,7 +93,7 @@ s_tatsu() { build_lib libtatsu 1.0.3 libimobiledevice/libtatsu; }
 s_imd() { rm -rf libimobiledevice-m; git clone --depth 1 https://github.com/libimobiledevice/libimobiledevice.git libimobiledevice-m || return 1
   cd libimobiledevice-m && NOCONFIGURE=1 ./autogen.sh \
     && ./configure --host="$HOST" --prefix="$PREFIX" --enable-static --disable-shared \
-       --without-cython --without-tools ac_cv_lib_pthread_pthread_once=yes \
+       --without-cython ac_cv_lib_pthread_pthread_once=yes \
     && make -j"$JOBS" && make install; }
 
 stage openssl  s_openssl  || true
