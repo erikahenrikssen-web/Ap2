@@ -50,6 +50,7 @@ s_plist() {
     || fetch libplist-2.7.0 "https://github.com/libimobiledevice/libplist/archive/refs/tags/2.7.0.tar.gz" \
     || { rm -rf libplist-2.7.0; git clone --depth 1 https://github.com/libimobiledevice/libplist.git libplist-2.7.0; } || return 1
   cd libplist-2.7.0
+  echo "2.7.0" > .tarball-version
   [ -f configure ] || NOCONFIGURE=1 ./autogen.sh
   echo "===== configure --help (cython/python section) ====="
   ./configure --help | grep -i -A2 "cython\|python"
