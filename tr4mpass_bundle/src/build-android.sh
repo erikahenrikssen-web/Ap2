@@ -94,6 +94,7 @@ s_imd() { rm -rf libimobiledevice-m; git clone --depth 1 https://github.com/libi
   cd libimobiledevice-m && NOCONFIGURE=1 ./autogen.sh \
     && ./configure --host="$HOST" --prefix="$PREFIX" --enable-static --disable-shared \
        --without-cython ac_cv_lib_pthread_pthread_once=yes \
+    && sed -i '/^SUBDIRS/ s/ tools//' Makefile \
     && make -j"$JOBS" && make install; }
 
 stage openssl  s_openssl  || true
