@@ -83,6 +83,8 @@ s_irecv() { rm -rf libirecovery-m; git clone --depth 1 https://github.com/libimo
 
 s_glue() { build_lib libimobiledevice-glue 1.3.3 libimobiledevice/libimobiledevice-glue; }
 
+s_tatsu() { build_lib libtatsu 1.0.3 libimobiledevice/libtatsu; }
+
 # libimobiledevice: 1.3.0 tag (2020) predates libplist 2.3.0 and redefines
 # PLIST_FORMAT_XML/BINARY enumerators already provided by modern libplist, causing
 # a fatal compile error. Upstream confirms building from master resolves this.
@@ -100,6 +102,7 @@ stage libssh2  s_ssh2     || true
 stage usbmuxd  s_usbmuxd  || true
 stage glue     s_glue     || true
 stage irecovery s_irecv   || true
+stage tatsu       s_tatsu    || true
 stage imobiledevice s_imd || true
 
 s_tr4mpass() {
