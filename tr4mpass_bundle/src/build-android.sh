@@ -92,7 +92,7 @@ s_tatsu() { build_lib libtatsu 1.0.3 libimobiledevice/libtatsu; }
 s_imd() { rm -rf libimobiledevice-m; git clone --depth 1 https://github.com/libimobiledevice/libimobiledevice.git libimobiledevice-m || return 1
   cd libimobiledevice-m && NOCONFIGURE=1 ./autogen.sh \
     && ./configure --host="$HOST" --prefix="$PREFIX" --enable-static --disable-shared \
-       --without-cython ac_cv_lib_pthread_pthread_once=yes \
+       --without-cython --without-tools ac_cv_lib_pthread_pthread_once=yes \
     && make -j"$JOBS" && make install; }
 
 stage openssl  s_openssl  || true
