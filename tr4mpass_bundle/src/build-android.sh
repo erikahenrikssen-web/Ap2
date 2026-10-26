@@ -46,10 +46,10 @@ s_libusb() { fetch libusb-1.0.27 https://github.com/libusb/libusb/releases/downl
     --enable-static --disable-shared --disable-udev && make -j"$JOBS" && make install; }
 
 s_plist() {
-  fetch libplist-2.3.0 "https://github.com/libimobiledevice/libplist/releases/download/2.3.0/libplist-2.3.0.tar.bz2" \
-    || fetch libplist-2.3.0 "https://github.com/libimobiledevice/libplist/archive/refs/tags/2.3.0.tar.gz" \
-    || { rm -rf libplist-2.3.0; git clone --depth 1 https://github.com/libimobiledevice/libplist.git libplist-2.3.0; } || return 1
-  cd libplist-2.3.0
+  fetch libplist-2.7.0 "https://github.com/libimobiledevice/libplist/releases/download/2.3.0/libplist-2.7.0.tar.bz2" \
+    || fetch libplist-2.7.0 "https://github.com/libimobiledevice/libplist/archive/refs/tags/2.7.0.tar.gz" \
+    || { rm -rf libplist-2.7.0; git clone --depth 1 https://github.com/libimobiledevice/libplist.git libplist-2.7.0; } || return 1
+  cd libplist-2.7.0
   [ -f configure ] || NOCONFIGURE=1 ./autogen.sh
   echo "===== configure --help (cython/python section) ====="
   ./configure --help | grep -i -A2 "cython\|python"
